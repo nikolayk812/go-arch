@@ -22,8 +22,9 @@ type uow struct {
 	cartRepo cartRepo
 }
 
-func NewUnitOfWork(repo Repo, cartRepo cartRepo) UnitOfWork {
+func NewUnitOfWork(pool *pgxpool.Pool, repo Repo, cartRepo cartRepo) UnitOfWork {
 	return &uow{
+		pool:     pool,
 		repo:     repo,
 		cartRepo: cartRepo,
 	}
@@ -37,7 +38,6 @@ func (u uow) CreateOrder(ctx context.Context, ownerID string) error {
 	}
 	defer tx.Commit(ctx)
 
-	// tx1
 	cart, err := u.cartRepo.GetTx(ctx, tx, ownerID)
 	if err != nil {
 		return err
