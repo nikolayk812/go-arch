@@ -16,7 +16,7 @@ type Repo interface {
 
 type repo struct {
 	pool        *pgxpool.Pool
-	cartToOrder CartToOrderFunc
+	cartToOrder CartToOrderFunc // could be a param in CreateOrder instead
 }
 
 func New(pool *pgxpool.Pool, cartToOrder CartToOrderFunc) Repo {
