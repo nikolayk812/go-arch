@@ -6,7 +6,7 @@ import (
 	"github.com/nikolayk812/go-arch/internal/domain"
 )
 
-func (r *repo) CreateOrder(ctx context.Context, ownerID string) error {
+func (r *repo) CreateOrder(ctx context.Context, ownerID string, cartToOrder CartToOrderFunc) error {
 	// for brevity, not production-ready tx management
 	tx, err := r.pool.Begin(ctx)
 	if err != nil {
@@ -19,7 +19,7 @@ func (r *repo) CreateOrder(ctx context.Context, ownerID string) error {
 		return err
 	}
 
-	order, err := r.cartToOrder(cart)
+	order, err := cartToOrder(cart)
 	if err != nil {
 		return err
 	}

@@ -11,17 +11,15 @@ type Repo interface {
 	AddCartItem(ctx context.Context, ownerID string, item domain.CartItem) error
 
 	// order section
-	CreateOrder(ctx context.Context, ownerID string) error
+	CreateOrder(ctx context.Context, ownerID string, cartToOrder CartToOrderFunc) error
 }
 
 type repo struct {
-	pool        *pgxpool.Pool
-	cartToOrder CartToOrderFunc // could be a param in CreateOrder instead
+	pool *pgxpool.Pool
 }
 
-func New(pool *pgxpool.Pool, cartToOrder CartToOrderFunc) Repo {
+func New(pool *pgxpool.Pool) Repo {
 	return &repo{
-		pool:        pool,
-		cartToOrder: cartToOrder,
+		pool: pool,
 	}
 }

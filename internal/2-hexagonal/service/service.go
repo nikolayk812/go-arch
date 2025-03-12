@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"github.com/nikolayk812/go-arch/internal/2/repo"
+	"github.com/nikolayk812/go-arch/internal/2-hexagonal/repo"
 	"github.com/nikolayk812/go-arch/internal/domain"
 )
 
