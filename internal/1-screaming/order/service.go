@@ -39,7 +39,7 @@ func (s service) CreateOrder(ctx context.Context, ownerID string) error {
 	}
 
 	// tx2
-	if err := s.repo.Create(ctx, order); err != nil {
+	if err := s.repo.Create(ctx, ownerID, order); err != nil {
 		return err
 	}
 

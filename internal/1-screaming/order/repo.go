@@ -7,7 +7,7 @@ import (
 )
 
 type Repo interface {
-	Create(ctx context.Context, order domain.Order) error
+	Create(ctx context.Context, ownerID string, order domain.Order) error
 }
 
 type repo struct {
@@ -18,7 +18,7 @@ func NewRepo(pool *pgxpool.Pool) Repo {
 	return &repo{pool: pool}
 }
 
-func (r repo) Create(ctx context.Context, order domain.Order) error {
+func (r repo) Create(ctx context.Context, ownerID string, order domain.Order) error {
 	//TODO implement
 
 	return nil
